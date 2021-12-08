@@ -71,7 +71,7 @@ const Header = () => {
               >
                 <MenuItem
                   onClick={() => {
-                    history.push("/");
+                    history.push("/home");
                     setAnchorElNav(null);
                   }}
                 >

@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../store/reducerManager";
 import thunk from "redux-thunk";
+import { authMiddleware } from "./authMiddleware";
 
-let middlewares = [thunk];
+let middlewares = [authMiddleware, thunk];
 
 /**
  * used create a store

@@ -45,29 +45,33 @@ export const loginOrRegister = (params) => async (dispatch) => {
   }
 };
 
-const authSuccessHandler = (dispatch, data, params) => {
-  setCookies("ACCESS_TOKEN", data.access_token, CONFIG_CONSTANTS.TOKEN_EXPIRY);
+export const authSuccessHandler = (dispatch, data, params) => {
+  setCookies("ACCESS_TOKEN", data.access_token);
   setCookies(
     "API_KEY",
     CONFIG_CONSTANTS.NY_API_KEY,
-    CONFIG_CONSTANTS.TOKEN_EXPIRY
+    CONFIG_CONSTANTS.TOKEN_EXPIRY_TIME
   );
+
   dispatch(
     emitEventToReducer({
       type: "AUTH_SUCCESS",
       payload: data.access_token,
     })
   );
-  params.history.push("/home");
-  let successMsg =
-    params.action == "AUTH_LOGIN"
-      ? "Logged In Successfully"
-      : "User Registered Successfully";
-  toast.success(successMsg);
+  if (params) {
+    params.history.push("/home");
+    let successMsg =
+      params.action == "AUTH_LOGIN"
+        ? "Logged In Successfully"
+        : "User Registered Successfully";
+    toast.success(successMsg);
+  }
 };
 
 export const logout = (params) => {
   params.history.push("/");
   removeCookies("API_KEY");
   removeCookies("ACCESS_TOKEN");
+  removeCookies("EXPIRY_TIME");
 };

@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   loggedIn: "false",
   accessToken: null,
+  tokenPromise: false,
 };
 
 /**
@@ -21,6 +22,11 @@ const loginReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loggedIn: false,
+      };
+    case "REFRESHING_TOKEN":
+      return {
+        ...state,
+        tokenPromise: action.freshTokenPromise,
       };
     default:
       return state;

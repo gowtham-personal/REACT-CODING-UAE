@@ -18,11 +18,11 @@ import Pagination from "@material-ui/lab/Pagination";
 const ArticleComments = () => {
   const classes = useStyles();
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(
-      getArticleComments({ offset: 0, url: API_URL_CONSTANTS.COMMENTS_URL })
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     getArticleComments({ offset: 0, url: API_URL_CONSTANTS.COMMENTS_URL })
+  //   );
+  // }, []);
 
   let comments = commentsResponse.results.comments;
   let [noOfPages, resource, handleChange, state, setState] = PaginationHooks(

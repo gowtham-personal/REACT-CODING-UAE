@@ -7,7 +7,11 @@ export const getCookies = (key) => {
 };
 
 export const setCookies = (key, value, minutes) => {
-  cookies.set(key, value, { path: "/", expires: getExpireTime(minutes) });
+  if (minutes) {
+    cookies.set(key, value, { path: "/", expires: getExpireTime(minutes) });
+  } else {
+    cookies.set(key, value, { path: "/" });
+  }
 };
 
 export const removeCookies = (key) => {
@@ -15,9 +19,10 @@ export const removeCookies = (key) => {
 };
 
 const getExpireTime = (minutes) => {
-  console.log(new Date(Date.now() + 5000));
-  if (minutes) {
-    minutes = 60;
-  }
-  return new Date(Date.now() + minutes * 6000);
+  let expireTime = new Date(Date.now() + minutes * 60000);
+  // console.log("======>", expireTime.getTime().valueOf());
+  cookies.set("EXPIRY_TIME", expireTime.getTime().valueOf(), {
+    path: "/",
+  });
+  return expireTime;
 };
