@@ -5,7 +5,7 @@ import { loginOrRegister } from "../screens/Login/services/loginAction";
 import { useHistory } from "react-router-dom";
 
 /**
- * Reusable code for fetching resource search and navigation to page.
+ * Reusable code for login and register logic.
  * @param {*} infinite
  * @returns
  */

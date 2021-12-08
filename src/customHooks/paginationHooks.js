@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 /**
- * Reusable code for fetching resource search and navigation to page.
+ * Reusable code for pagination logic
  * @param {*} infinite
  * @returns
  */

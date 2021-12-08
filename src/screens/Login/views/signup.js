@@ -56,6 +56,15 @@ const SignUp = () => {
               />
             </Grid>
           </Grid>
+          {state.errorMsg && (
+            <Typography
+              component="h6"
+              variant="h6"
+              className={classes.errorMsg}
+            >
+              * {state.errorMsg}
+            </Typography>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -65,9 +74,7 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Typography component="h5" variant="h6">
-            {state.errorMsg}
-          </Typography>
+
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link onClick={() => history.push("/")} variant="body2">

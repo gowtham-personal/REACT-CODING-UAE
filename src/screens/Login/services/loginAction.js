@@ -10,7 +10,7 @@ export const emitEventToReducer = (params) => ({
 });
 
 /**
- * Action Creator to call resource api and store result in store
+ * Action Creator to call logi api and store result in store
  * @param {*} params
  * @returns
  */
@@ -45,6 +45,12 @@ export const loginOrRegister = (params) => async (dispatch) => {
   }
 };
 
+/**
+ * To handle login sucess
+ * @param {*} dispatch
+ * @param {*} data
+ * @param {*} params
+ */
 export const authSuccessHandler = (dispatch, data, params) => {
   setCookies("ACCESS_TOKEN", data.access_token);
   setCookies(
@@ -69,6 +75,10 @@ export const authSuccessHandler = (dispatch, data, params) => {
   }
 };
 
+/**
+ * For logout
+ * @param {*} params
+ */
 export const logout = (params) => {
   params.history.push("/");
   removeCookies("API_KEY");

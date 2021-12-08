@@ -8,7 +8,7 @@ export const emitEventToReducer = (params) => ({
 });
 
 /**
- * Action Creator to call resource api and store result in store
+ * Action Creator to call article api and store result in store
  * @param {*} params
  * @returns
  */
@@ -56,6 +56,10 @@ export const getSearchedArticles = (params) => async (dispatch) => {
   }
 };
 
+/**
+ * Logic to persist user search history
+ * @param {*} params
+ */
 const persistSearchHistory = (params) => {
   let searchHistory = localStorage.getItem("SEARCH_HISTORY")
     ? JSON.parse(localStorage.getItem("SEARCH_HISTORY"))

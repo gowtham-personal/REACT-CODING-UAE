@@ -26,7 +26,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
     case "REFRESHING_TOKEN":
       return {
         ...state,
-        tokenPromise: action.freshTokenPromise,
+        tokenPromise: action.payload,
       };
     default:
       return state;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useLocation, Redirect } from "react-router-dom";
+import { Switch, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { emitEventToReducer } from "../screens/Header/services/headerActions";
-import { getCookies } from "../helper/cookies";
+import { renderComponent } from "./routeUtils";
 
 const NyTimesHome = React.lazy(() =>
   import("../screens/NyTimes/views/nyTimesHome")
@@ -46,46 +46,6 @@ const RoutesComponent = () => {
       <Switch>{renderComponent("/search", SearchArticle, false)}</Switch>
     </div>
   );
-};
-
-const renderComponent = (path, Component, isExact, isPublicRoute) => {
-  if (isExact) {
-    return (
-      <Route
-        path={path}
-        exact
-        render={(props) => {
-          return (
-            <React.Suspense fallback={"...loading"}>
-              <Component {...props} />
-            </React.Suspense>
-          );
-        }}
-      />
-    );
-  } else {
-    return (
-      <Route
-        path={path}
-        render={(props) => {
-          if (checkLoggedInUser() || isPublicRoute) {
-            return (
-              <React.Suspense fallback={"...loading"}>
-                <Component {...props} />
-              </React.Suspense>
-            );
-          } else {
-            return <Redirect to={{ pathname: "/" }} />;
-          }
-        }}
-      />
-    );
-  }
-};
-
-const checkLoggedInUser = () => {
-  if (getCookies("ACCESS_TOKEN")) return true;
-  return false;
 };
 
 export default RoutesComponent;

@@ -47,11 +47,19 @@ export const postMethod = async (url, requestData, header, params) => {
   }
 };
 
+/**
+ * For URL format encoding
+ * @param {*} jsonData
+ * @returns
+ */
 const transformRequest = (jsonData = {}) =>
   Object.entries(jsonData)
     .map((x) => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
     .join("&");
 
+/**
+ * Interceptor for axios request to handle api key for Authorization
+ */
 axios.defaults.params = {};
 axios.defaults.headers.get["Content-Type"] = "application/json";
 axios.interceptors.request.use(

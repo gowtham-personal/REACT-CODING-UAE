@@ -7,7 +7,7 @@ export const emitEventToReducer = (params) => ({
 });
 
 /**
- * Action Creator to call resource api and store result in store
+ * Action Creator to call article api and store result in store
  * @param {*} params
  * @returns
  */
@@ -50,20 +50,21 @@ export const getNyHomeDetails = (params) => async (dispatch) => {
   }
 };
 
+/**
+ * To get Comments
+ * @param {*} params
+ * @returns
+ */
 export const getArticleComments = (params) => async (dispatch) => {
   try {
     let { url, offset } = params;
-    let headers = {
-      // "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Headers": "*",
-    };
     let queryParams = {
       url,
       offset,
     };
     let commentsResponse = await getMethod(
       API_URL_CONSTANTS.FETCH_ARTICLE_COMMENTS,
-      headers,
+      {},
       queryParams
     );
     console.log("commentsResponse", commentsResponse);
@@ -92,6 +93,11 @@ export const getArticleComments = (params) => async (dispatch) => {
   }
 };
 
+/**
+ * To persist stories with hash
+ * @param {*} topStories
+ * @returns
+ */
 export const persistStoriesWithHash = (topStories) => {
   let topStoriesObj = {};
   topStories.map((story) => {
@@ -112,6 +118,11 @@ export const persistStoriesWithHash = (topStories) => {
   return topStories;
 };
 
+/**
+ * To get hash from url
+ * @param {*} shortUrl
+ * @returns
+ */
 export const getHashFromUrl = (shortUrl) => {
   let hashKey = null;
   if (shortUrl) {
