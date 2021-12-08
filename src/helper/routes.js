@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { emitEventToReducer } from "../screens/Header/services/headerActions";
+import { getCookies } from "../helper/cookies";
 
 const NyTimesHome = React.lazy(() =>
   import("../screens/NyTimes/views/nyTimesHome")
@@ -34,18 +35,20 @@ const RoutesComponent = () => {
   return (
     <div className="container">
       <Switch>{renderComponent("/", Login, true)}</Switch>
-      <Switch>{renderComponent("/signup", Signup)}</Switch>
-      <Switch>{renderComponent("/home", NyTimesHome)}</Switch>
-      <Switch>{renderComponent("/category/:newsType", NyTimesHome)}</Switch>
+      <Switch>{renderComponent("/signup", Signup, true)}</Switch>
+      <Switch>{renderComponent("/home", NyTimesHome, false)}</Switch>
       <Switch>
-        {renderComponent("/article/:articleHash", NyTimesArticles)}
+        {renderComponent("/category/:newsType", NyTimesHome, false)}
       </Switch>
-      <Switch>{renderComponent("/search", SearchArticle)}</Switch>
+      <Switch>
+        {renderComponent("/article/:articleHash", NyTimesArticles, false)}
+      </Switch>
+      <Switch>{renderComponent("/search", SearchArticle, false)}</Switch>
     </div>
   );
 };
 
-const renderComponent = (path, Component, isExact) => {
+const renderComponent = (path, Component, isExact, isPublicRoute) => {
   if (isExact) {
     return (
       <Route
@@ -65,15 +68,24 @@ const renderComponent = (path, Component, isExact) => {
       <Route
         path={path}
         render={(props) => {
-          return (
-            <React.Suspense fallback={"...loading"}>
-              <Component {...props} />
-            </React.Suspense>
-          );
+          if (checkLoggedInUser() || isPublicRoute) {
+            return (
+              <React.Suspense fallback={"...loading"}>
+                <Component {...props} />
+              </React.Suspense>
+            );
+          } else {
+            return <Redirect to={{ pathname: "/" }} />;
+          }
         }}
       />
     );
   }
+};
+
+const checkLoggedInUser = () => {
+  if (getCookies("ACCESS_TOKEN")) return true;
+  return false;
 };
 
 export default RoutesComponent;

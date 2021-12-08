@@ -18,4 +18,8 @@ export const signupStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  errorMsg: {
+    color: "red",
+    fontSize: 13,
+  },
 }));

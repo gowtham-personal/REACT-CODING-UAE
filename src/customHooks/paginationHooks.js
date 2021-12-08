@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 /**
  * Reusable code for fetching resource search and navigation to page.

@@ -13,6 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { getNyHomeDetails } from "../../NyTimes/services/nyTimesAction";
 import { HeaderStyles } from "./headerStyles";
+import { logout } from "../../Login/services/loginAction";
 
 const Header = () => {
   const classes = HeaderStyles();
@@ -25,7 +26,7 @@ const Header = () => {
   const handleCloseNavMenu = (route) => {
     setAnchorElNav(null);
     if (route == "logout") {
-      history.push("/");
+      logout({ history });
     } else if (route) {
       history.push(`/category/${route}`);
       dispatch(getNyHomeDetails({ newsType: route }));

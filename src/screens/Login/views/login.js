@@ -12,27 +12,12 @@ import Typography from "@material-ui/core/Typography";
 import { signupStyles } from "./signupStyles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import { LoginRegisterHooks } from "../../../customHooks/loginRegisterHooks";
 
 const Login = () => {
   const classes = signupStyles();
   let history = useHistory();
-  let [state, setState] = useState({ errorMsg: "", email: "", password: "" });
-
-  const onLogin = (e) => {
-    e.preventDefault();
-    console.log("Login", e, state);
-    if (CONFIG_CONSTANTS.EMAIL_REGEX.test(state.email)) {
-    }
-  };
-
-  const onFormChange = (event) => {
-    event.persist();
-    console.log(event.target.name, event.target.value);
-    setState((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  let [state, onLoginRegister, onFormChange] = LoginRegisterHooks("AUTH_LOGIN");
 
   return (
     <Container component="main" maxWidth="xs">
@@ -44,7 +29,7 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={onLogin}>
+        <form className={classes.form} onSubmit={onLoginRegister}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -73,9 +58,15 @@ const Login = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Typography component="h5" variant="h6">
-            {state.errorMsg}
-          </Typography>
+          {state.errorMsg && (
+            <Typography
+              component="h6"
+              variant="h6"
+              className={classes.errorMsg}
+            >
+              * {state.errorMsg}
+            </Typography>
+          )}
           <Button
             type="submit"
             fullWidth

@@ -10,10 +10,14 @@ import Typography from "@material-ui/core/Typography";
 import { signupStyles } from "./signupStyles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import { LoginRegisterHooks } from "../../../customHooks/loginRegisterHooks";
 
 const SignUp = () => {
   const classes = signupStyles();
   let history = useHistory();
+  let [state, onLoginRegister, onFormChange] =
+    LoginRegisterHooks("AUTH_SIGNUP");
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -24,7 +28,7 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={onLoginRegister}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -35,6 +39,7 @@ const SignUp = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={onFormChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -47,6 +52,7 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={onFormChange}
               />
             </Grid>
           </Grid>
@@ -59,6 +65,9 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
+          <Typography component="h5" variant="h6">
+            {state.errorMsg}
+          </Typography>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link onClick={() => history.push("/")} variant="body2">

@@ -56,7 +56,8 @@ axios.defaults.params = {};
 axios.defaults.headers.get["Content-Type"] = "application/json";
 axios.interceptors.request.use(
   (config) => {
-    config.params["api-key"] = getCookies("API_KEY");
+    if (config.method == "get")
+      config.params["api-key"] = getCookies("API_KEY");
     return config;
   },
   (error) => {

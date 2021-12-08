@@ -1,5 +1,8 @@
 import API_URL_CONSTANTS from "../../../constants/apiUrlConstants";
-import { getMethod } from "../../../helper/api";
+import CONFIG_CONSTANTS from "../../../constants/configConstants";
+import { postMethod } from "../../../helper/api";
+import { toast } from "react-toastify";
+import { setCookies, removeCookies } from "../../../helper/cookies";
 
 export const emitEventToReducer = (params) => ({
   type: params.type,
@@ -13,20 +16,21 @@ export const emitEventToReducer = (params) => ({
  */
 export const loginOrRegister = (params) => async (dispatch) => {
   try {
-    let searchResponse = await getMethod(
-      `${API_URL_CONSTANTS.FETCH_SEARCHED_ARTICLE}?q=${params.searchKey}`
-    );
-    console.log("searchResponse", searchResponse);
-    if (
-      searchResponse &&
-      searchResponse.status == 200 &&
-      searchResponse.data.response.docs
-    ) {
-      let searchedArticles = searchResponse.data.response.docs;
+    let { email, password } = params;
+    let authResponse = await postMethod(`${API_URL_CONSTANTS[params.action]}`, {
+      email,
+      password,
+    });
+    console.log("authResponse", authResponse);
+    let { status, data } = authResponse;
+    if (status == 200 && data && data.access_token) {
+      authSuccessHandler(dispatch, data, params);
+    } else {
+      toast.error(data.message);
       dispatch(
         emitEventToReducer({
-          type: "STORE_SEARCHED_RESOURCE",
-          payload: modifiedArticles,
+          type: "AUTH_FAILURE",
+          payload: data.message,
         })
       );
     }
@@ -34,9 +38,36 @@ export const loginOrRegister = (params) => async (dispatch) => {
     console.log("error", error);
     dispatch(
       emitEventToReducer({
-        type: "LOAD_WEB_RESOURCE_FAILURE",
+        type: "AUTH_FAILURE",
         payload: error.message,
       })
     );
   }
+};
+
+const authSuccessHandler = (dispatch, data, params) => {
+  setCookies("ACCESS_TOKEN", data.access_token, CONFIG_CONSTANTS.TOKEN_EXPIRY);
+  setCookies(
+    "API_KEY",
+    CONFIG_CONSTANTS.NY_API_KEY,
+    CONFIG_CONSTANTS.TOKEN_EXPIRY
+  );
+  dispatch(
+    emitEventToReducer({
+      type: "AUTH_SUCCESS",
+      payload: data.access_token,
+    })
+  );
+  params.history.push("/home");
+  let successMsg =
+    params.action == "AUTH_LOGIN"
+      ? "Logged In Successfully"
+      : "User Registered Successfully";
+  toast.success(successMsg);
+};
+
+export const logout = (params) => {
+  params.history.push("/");
+  removeCookies("API_KEY");
+  removeCookies("ACCESS_TOKEN");
 };
