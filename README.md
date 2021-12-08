@@ -12,7 +12,7 @@ To visit this site [http://localhost:4000](http://localhost:4000)
 
 3.Pagination for resources
 
-4.Oauth
+4.login and register with oauth
 
 ## Tech Stack Used
 
@@ -40,13 +40,11 @@ ES6 Features used in this Project are
 
 3.Proper strucuring of Pages into Component
 
-4.seperation of concerns
+4.used constants
 
-5.used constants
+5.used functional component
 
-8.used functional component
-
-9.custome middleware for oauth added.
+6.custome middleware for oauth added.
 
 ## To Start the App
 
@@ -61,3 +59,14 @@ ES6 Features used in this Project are
 ## with coverage
 
 1. npm run test -- --coverage --watchAll=false
+
+## For oauth Integration
+
+[https://github.com/techiediaries/fake-api-jwt-json-server](https://github.com/techiediaries/fake-api-jwt-json-server)
+
+![Screens](/src/images/ss1.png)
+![Screens](/src/images/ss2.png)
+![Screens](/src/images/ss3.png)
+![Screens](/src/images/ss4.png)
+![Screens](/src/images/ss5.png)
+![Screens](/src/images/ss6.png)
