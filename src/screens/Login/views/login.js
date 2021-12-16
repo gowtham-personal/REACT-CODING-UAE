@@ -9,27 +9,26 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { signupStyles } from "./signupStyles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import { LoginRegisterHooks } from "../../../customHooks/loginRegisterHooks";
+import "./login.scss";
 
 const Login = () => {
-  const classes = signupStyles();
   let history = useHistory();
   let [state, onLoginRegister, onFormChange] = LoginRegisterHooks("AUTH_LOGIN");
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div className="Login">
+        <Avatar>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={onLoginRegister}>
+        <form onSubmit={onLoginRegister}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -59,21 +58,11 @@ const Login = () => {
             label="Remember me"
           />
           {state.errorMsg && (
-            <Typography
-              component="h6"
-              variant="h6"
-              className={classes.errorMsg}
-            >
+            <Typography component="h6" variant="h6">
               * {state.errorMsg}
             </Typography>
           )}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary">
             Sign In
           </Button>
           <Grid container>

@@ -1,0 +1,13 @@
+.Header {
+  flex-grow: 1;
+  .side-bar-toggle {
+    margin-right: 3%;
+  }
+  div h6 {
+    flex-grow: 1;
+    cursor: pointer;
+  }
+}
+.side-bar-list {
+  width: 250px;
+}

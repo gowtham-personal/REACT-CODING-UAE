@@ -15,11 +15,10 @@ import { getHashFromUrl } from "../services/nyTimesAction";
 
 const NewsCard = (props) => {
   let history = useHistory();
-  let { article, isArticlePage, classes } = props;
+  let { article, isArticlePage } = props;
   return (
     <Grid key={article.updated_date} item xs={12}>
       <Card
-        className={classes.cardRoot}
         onClick={() => {
           if (!isArticlePage) {
             history.push(`/article/${getHashFromUrl(article.short_url)}`);
@@ -28,7 +27,7 @@ const NewsCard = (props) => {
       >
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
+            <Avatar aria-label="recipe">
               {article.section.charAt(0).toUpperCase()}
             </Avatar>
           }
@@ -37,28 +36,20 @@ const NewsCard = (props) => {
         />
 
         <CardContent>
-          <Typography
-            variant="h5"
-            component="h2"
-            className={classes.title}
-            gutterBottom
-          >
+          <Typography variant="h5" component="h2" gutterBottom>
             {article.title}
           </Typography>
           {isArticlePage && (
-            <Typography className={classes.pos} color="textSecondary">
-              {article.abstract}
-            </Typography>
+            <Typography color="textSecondary">{article.abstract}</Typography>
           )}
         </CardContent>
         {isArticlePage && (
-          <CardActions className={classes.cardFooter}>
+          <CardActions>
             <Button
               size="small"
               color="primary"
               href={article.short_url}
               target="_blank"
-              className={classes.footerLink}
             >
               Visit Our Site
             </Button>

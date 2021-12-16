@@ -1,0 +1,53 @@
+.NyTimes {
+  flex-grow: 1;
+  margin-top: 20px;
+
+  .MuiPaper-root {
+    cursor: pointer;
+    display: flex;
+    min-width: 275px;
+    min-height: 150px;
+    flex-direction: column;
+    background-color: antiquewhite;
+  }
+
+  .MuiAvatar-root {
+    z-index: 1;
+    background-color: #f44336;
+  }
+
+  .MuiCardHeader-title {
+    font-size: 14px;
+  }
+  .MuiCardHeader-subheader {
+    font-size: 14px;
+  }
+  .MuiCardActions-root {
+    position: relative;
+    margin-top: auto;
+  }
+  .MuiButton-textPrimary {
+    right: 10px;
+    bottom: 5px;
+    position: absolute;
+  }
+  h2 {
+    font-size: 13px;
+  }
+  .MuiList-root {
+    width: 98%;
+    margin-left: 20px;
+    background-color: #f1d1d1;
+  }
+}
+
+.search {
+  width: 400px;
+  z-index: 100;
+}
+
+.loader {
+  color: "grey.500";
+  margin-top: 100px;
+  text-align: "center";
+}

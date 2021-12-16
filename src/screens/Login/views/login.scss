@@ -1,0 +1,29 @@
+.Login {
+  margin-top: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .MuiAvatar-root {
+    margin: 1%;
+    background-color: red;
+  }
+
+  form {
+    width: 100%; // Fix IE 11 issue.
+    margin-top: 5%;
+  }
+
+  h6 {
+    color: red;
+    font-size: 13px;
+  }
+
+  .MuiGrid-item {
+    margin-top: 5px;
+  }
+
+  .submit {
+    margin-top: 15px;
+  }
+}

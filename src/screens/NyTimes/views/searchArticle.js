@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { NyTimesStyles } from "./nyTimesHomeStyle";
+import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { Grid, CircularProgress, Box } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
@@ -7,9 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import NewsCard from "./newsCard";
 import { getSearchedArticles } from "../services/searchArticleAction";
 import { PaginationHooks } from "../../../customHooks/paginationHooks";
+import "./nyTimes.scss";
 
 const SearchArticle = () => {
-  const classes = NyTimesStyles()();
   let dispatch = useDispatch();
   let { searchedResource, isLoading } = useSelector(
     (state) => state.nyTimesReducer
@@ -37,9 +36,9 @@ const SearchArticle = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="NyTimes">
       <Grid container item xs={12} lg={12}>
-        <Grid item className={classes.search} xs={12} lg={6}>
+        <Grid item className="search" xs={12} lg={6}>
           <ReactSearchAutocomplete
             items={searchItems}
             placeholder="Search"
@@ -55,7 +54,7 @@ const SearchArticle = () => {
         {noOfPages > 1 && (
           <Grid item xs={12} lg={6}>
             <Pagination
-              className={classes.pagination}
+              className="pagination"
               count={noOfPages}
               page={state.pageNo}
               onChange={handleChange}
@@ -64,11 +63,11 @@ const SearchArticle = () => {
         )}
       </Grid>
       {isLoading && (
-        <Box className={classes.loader} spacing={2} direction="row">
+        <Box className="loader" spacing={2} direction="row">
           <CircularProgress color="inherit" />
         </Box>
       )}
-      <div className={classes.root}>
+      <div className="NyTimes">
         <Grid container spacing={2}>
           <Grid container item xs={12} spacing={4}>
             {resource &&
@@ -77,11 +76,7 @@ const SearchArticle = () => {
                 if (value.abstract) {
                   return (
                     <Grid key={value._id} item xs={12} lg={6}>
-                      <NewsCard
-                        classes={classes}
-                        article={value}
-                        isArticlePage={false}
-                      />
+                      <NewsCard article={value} isArticlePage={false} />
                     </Grid>
                   );
                 }
