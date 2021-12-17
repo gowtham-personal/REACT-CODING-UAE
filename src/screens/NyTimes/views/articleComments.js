@@ -10,6 +10,7 @@ import { commentsResponse } from "../../../constants/commentsJson";
 import { PaginationHooks } from "../../../customHooks/paginationHooks";
 import { Grid } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
+import Divider from "@mui/material/Divider";
 
 const ArticleComments = () => {
   let comments = commentsResponse.results.comments;
@@ -23,21 +24,25 @@ const ArticleComments = () => {
       <List>
         {resource &&
           resource.length > 0 &&
-          resource.map((value) => {
+          resource.map((value, index) => {
             return (
-              <ListItem key={value.commentID}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={value.commentBody}
-                  secondary={moment
-                    .unix(value.createDate)
-                    .format("MMM DD YYYY hh:mm A")}
-                />
-              </ListItem>
+              <>
+                <ListItem key={value.commentID}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ImageIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={value.commentBody}
+                    secondary={moment
+                      .unix(value.createDate)
+                      .format("MMM DD YYYY hh:mm A")}
+                  />
+                </ListItem>
+                {index == 0 && <Divider />}
+                {index % 4 != 0 && <Divider />}
+              </>
             );
           })}
       </List>

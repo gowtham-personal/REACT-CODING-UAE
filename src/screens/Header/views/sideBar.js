@@ -72,7 +72,7 @@ const SideBar = () => {
               }
               onClick={() => handleSideBarClose(text.route)}
             >
-              <ListItemIcon className="list-button">{text.icon}</ListItemIcon>
+              <ListItemIcon>{text.icon}</ListItemIcon>
               <ListItemText primary={text.name} />
             </ListItem>
           ))}
