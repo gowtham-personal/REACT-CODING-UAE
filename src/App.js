@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import RoutesComponent from "./helper/routes";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import Header from "./screens/Header/views/header";
-import Container from "@material-ui/core/Container";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AppContainer from "./AppContainer";
+
 /**
  * Base Structure of the APP
  * @returns
@@ -26,10 +25,7 @@ const App = () => {
         pauseOnHover={false}
       />
       <Router>
-        <Header />
-        <Container maxWidth="lg">
-          <RoutesComponent />
-        </Container>
+        <AppContainer />
       </Router>
     </Provider>
   );

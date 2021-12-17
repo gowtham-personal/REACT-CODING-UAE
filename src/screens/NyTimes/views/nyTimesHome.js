@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Grid, CircularProgress, Box } from "@mui/material";
 import { getNyHomeDetails } from "../services/nyTimesAction";
 import NewsCard from "./newsCard";
 import "./nyTimes.scss";
@@ -13,7 +13,9 @@ const NyTimesHome = () => {
     dispatch(getNyHomeDetails({ newsType }));
   }, []);
 
-  let { nyHomeResources } = useSelector((state) => state.nyTimesReducer);
+  let { nyHomeResources, isLoading } = useSelector(
+    (state) => state.nyTimesReducer
+  );
   console.log("nyHomeResources", nyHomeResources);
   return (
     <div className="NyTimes">
@@ -29,6 +31,11 @@ const NyTimesHome = () => {
             }
           })}
         </Grid>
+        {isLoading && (
+          <Box className="loader" spacing={2} direction="row">
+            <CircularProgress color="inherit" />
+          </Box>
+        )}
       </Grid>
     </div>
   );

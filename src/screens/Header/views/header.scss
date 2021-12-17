@@ -1,18 +1,34 @@
 @import "../../../Responsive.scss";
 
+$drawerWidth: 240px;
+
 .Header {
   flex-grow: 1;
   .side-bar-toggle {
     margin-right: 3%;
+    display: none;
   }
-  div h6 {
+  div h5 {
     flex-grow: 1;
     cursor: pointer;
+    font-size: 18px;
+    color: #121828;
+  }
+
+  .list-button {
+    color: #10b981;
+  }
+
+  .MuiPaper-root {
+    margin-top: 0;
+    background: white;
+    color: #6b7280;
+    // width: calc(100% - #{$drawerWidth});
   }
 
   @media screen and (max-width: $mobile) {
-    div h6 {
-      display: none;
+    .side-bar-toggle {
+      display: block;
     }
   }
 }
@@ -50,5 +66,42 @@
 @media screen and(min-width: $macDesktop) {
   .user-icons-sm {
     display: none;
+  }
+}
+
+.MuiDrawer-root {
+  .MuiPaper-root {
+    background-color: #121828;
+    color: #9ca3af;
+
+    .MuiButtonBase-root {
+      &:hover {
+        color: #10b981;
+        .MuiListItemIcon-root {
+          color: #10b981;
+        }
+      }
+    }
+    .MuiTypography-displayBlock {
+      display: block;
+      font-size: 14px;
+    }
+
+    .side-heading {
+      font-size: 20px;
+      color: #f7f1f1;
+      font-weight: 500;
+    }
+
+    .MuiDivider-root {
+      border-color: #2d3748;
+    }
+    .MuiListItemIcon-root {
+      color: #9ca3af;
+      min-width: 36px;
+      &:hover {
+        color: #10b981;
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { Grid, CircularProgress, Box } from "@material-ui/core";
-import Pagination from "@material-ui/lab/Pagination";
+import { Grid, CircularProgress, Box } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import NewsCard from "./newsCard";
 import { getSearchedArticles } from "../services/searchArticleAction";
@@ -51,16 +51,6 @@ const SearchArticle = () => {
             formatResult={formatResult}
           />
         </Grid>
-        {noOfPages > 1 && (
-          <Grid item xs={12} lg={6}>
-            <Pagination
-              className="pagination"
-              count={noOfPages}
-              page={state.pageNo}
-              onChange={handleChange}
-            />
-          </Grid>
-        )}
       </Grid>
       {isLoading && (
         <Box className="loader" spacing={2} direction="row">
@@ -84,6 +74,17 @@ const SearchArticle = () => {
           </Grid>
         </Grid>
       </div>
+      {noOfPages > 1 && (
+        <Grid item xs={12} lg={6}>
+          <Pagination
+            className="pagination"
+            count={noOfPages}
+            page={state.pageNo}
+            onChange={handleChange}
+            color="secondary"
+          />
+        </Grid>
+      )}
     </div>
   );
 };

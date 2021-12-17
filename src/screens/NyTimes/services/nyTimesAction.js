@@ -13,6 +13,12 @@ export const emitEventToReducer = (params) => ({
  */
 export const getNyHomeDetails = (params) => async (dispatch) => {
   try {
+    dispatch(
+      emitEventToReducer({
+        type: "START_LOADER",
+        payload: true,
+      })
+    );
     let { newsType } = params;
     newsType = newsType ? newsType : "home";
     let nyhomeResponse = await getMethod(
@@ -38,6 +44,12 @@ export const getNyHomeDetails = (params) => async (dispatch) => {
         })
       );
       persistStoriesWithHash(topStories);
+      dispatch(
+        emitEventToReducer({
+          type: "START_LOADER",
+          payload: false,
+        })
+      );
     }
   } catch (error) {
     console.log("error", error);
@@ -45,6 +57,12 @@ export const getNyHomeDetails = (params) => async (dispatch) => {
       emitEventToReducer({
         type: "LOAD_WEB_RESOURCE_FAILURE",
         payload: error.message,
+      })
+    );
+    dispatch(
+      emitEventToReducer({
+        type: "START_LOADER",
+        payload: false,
       })
     );
   }

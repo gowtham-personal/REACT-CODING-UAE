@@ -8,12 +8,13 @@
     min-width: 275px;
     min-height: 150px;
     flex-direction: column;
-    background-color: antiquewhite;
+    // background-color: antiquewhite;
+    background-color: #bbbbbb;
   }
 
   .MuiAvatar-root {
     z-index: 1;
-    background-color: #f44336;
+    background-color: #4e6531;
   }
 
   .MuiCardHeader-title {
@@ -34,10 +35,18 @@
   h2 {
     font-size: 13px;
   }
+
   .MuiList-root {
-    width: 98%;
-    margin-left: 20px;
-    background-color: #f1d1d1;
+    width: 97.5%;
+    margin-left: 30px;
+    margin-top: 20px;
+    background-color: #f7d5d559;
+    border-radius: 5px;
+  }
+
+  .MuiPagination-ul {
+    justify-content: center;
+    margin-top: 30px;
   }
 }
 
@@ -47,7 +56,7 @@
 }
 
 .loader {
-  color: "grey.500";
+  color: grey;
   margin-top: 100px;
-  text-align: "center";
+  margin-left: 50%;
 }

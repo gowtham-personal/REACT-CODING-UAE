@@ -8,7 +8,7 @@ import {
   Grid,
   Card,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { getHashFromUrl } from "../services/nyTimesAction";
