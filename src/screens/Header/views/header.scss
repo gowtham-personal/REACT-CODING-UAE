@@ -1,3 +1,5 @@
+@import "../../../Responsive.scss";
+
 .Header {
   flex-grow: 1;
   .side-bar-toggle {
@@ -7,7 +9,46 @@
     flex-grow: 1;
     cursor: pointer;
   }
+
+  @media screen and (max-width: $mobile) {
+    div h6 {
+      display: none;
+    }
+  }
 }
-.side-bar-list {
-  width: 250px;
+
+@media screen and (max-width: $mobile) {
+  .side-bar-list {
+    width: 190px;
+  }
+  .user-icons-lg {
+    display: none;
+  }
+}
+
+@media screen and(min-width: $tabletMin) and (max-width: $tabletMax) {
+  .user-icons-lg {
+    display: none;
+  }
+}
+
+@media screen and(min-width: $ipadMin) and (max-width: $ipadMax) {
+  .user-icons-sm {
+    display: none;
+  }
+}
+
+@media screen and(min-width: $desktopMin) and (max-width: $desktopMax) {
+  .side-bar-list {
+    width: 250px;
+  }
+  .user-icons-sm {
+    display: none;
+  }
+}
+
+@media screen and(min-width: $macDesktop) {
+  .user-icons-sm {
+    display: none;
+  }
 }

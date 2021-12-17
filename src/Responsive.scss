@@ -1,0 +1,28 @@
+$mobile: 480px;
+$tabletMin: 481px;
+$tabletMax: 767px;
+$ipadMin: 768px;
+$ipadMax: 1024px;
+$desktopMin: 1025px;
+$desktopMax: 1280px;
+$macDesktop: 1281px;
+
+/* Media Query for Mobile Devices */
+@media screen and (max-width: $mobile) {
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media screen and(min-width: $tabletMin) and (max-width: $tabletMax) {
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media screen and(min-width: $ipadMin) and (max-width: $ipadMax) {
+}
+
+/* Media Query for Laptops and Desktops */
+@media screen and(min-width: $desktopMin) and (max-width: $desktopMax) {
+}
+
+/* Media Query for Large screens */
+@media screen and(min-width: $macDesktop) {
+}

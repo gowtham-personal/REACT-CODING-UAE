@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, Box, CircularProgress } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getNyHomeDetails } from "../services/nyTimesAction";
@@ -22,7 +22,7 @@ const NyTimesHome = () => {
           {nyHomeResources.map((value) => {
             if (value.title) {
               return (
-                <Grid key={value.short_url} item xs={12} lg={4}>
+                <Grid key={value.short_url} item xs={12} lg={4} md={6}>
                   <NewsCard article={value} isArticlePage={false} />
                 </Grid>
               );

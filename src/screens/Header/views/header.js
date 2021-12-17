@@ -3,31 +3,18 @@ import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import { useSelector, useDispatch } from "react-redux";
-import { getNyHomeDetails } from "../../NyTimes/services/nyTimesAction";
-import { logout } from "../../Login/services/loginAction";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import BookIcon from "@material-ui/icons/Book";
+import { useSelector } from "react-redux";
+import Badge from "@material-ui/core/Badge";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import SideBar from "./sideBar";
 import "./header.scss";
 
 const Header = () => {
   let history = useHistory();
-  let dispatch = useDispatch();
   const [state, setState] = useState({ openSideBar: false });
-  const handleSideBarClose = (route) => {
-    setState({ openSideBar: false });
-    history.push(route);
-    let routeParam = route.split("/category/")[1];
-    if (routeParam) {
-      dispatch(getNyHomeDetails({ newsType: routeParam }));
-    }
-  };
+
   let { headerTitle, currentLocation } = useSelector(
     (state) => state.headerReducer
   );
@@ -48,51 +35,7 @@ const Header = () => {
                 <MenuIcon />
               </IconButton>
               {state.openSideBar && (
-                <Drawer
-                  anchor="left"
-                  open={state.openSideBar}
-                  onClose={() => setState({ openSideBar: false })}
-                >
-                  <div
-                    className="side-bar-list"
-                    role="presentation"
-                    onClick={() => setState({ openSideBar: false })}
-                    onKeyDown={() => setState({ openSideBar: false })}
-                  >
-                    <List>
-                      {[
-                        { name: "World News", route: "/category/world" },
-                        { name: "Science News", route: "/category/science" },
-                        { name: "Top Stories", route: "/home" },
-                        { name: "Search", route: "/search" },
-                      ].map((text, index) => (
-                        <ListItem
-                          button
-                          key={text}
-                          onClick={() => handleSideBarClose(text.route)}
-                        >
-                          <ListItemIcon>
-                            {text.route === "/search" ? (
-                              <SearchIcon />
-                            ) : (
-                              <BookIcon />
-                            )}
-                          </ListItemIcon>
-                          <ListItemText primary={text.name} />
-                        </ListItem>
-                      ))}
-                    </List>
-                    <Divider />
-                    <List>
-                      <ListItem button onClick={() => logout({ history })}>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" />
-                      </ListItem>
-                    </List>
-                  </div>
-                </Drawer>
+                <SideBar state={state} setParentState={setState} />
               )}
               <Typography
                 onClick={() => history.push("/home")}
@@ -101,14 +44,43 @@ const Header = () => {
               >
                 {headerTitle}{" "}
               </Typography>
-              <div>
+              <div className="user-icons-lg">
                 <IconButton
-                  aria-label="search"
+                  aria-label="show 4 new mails"
                   color="inherit"
                   onClick={() => history.push("/search")}
-                  edge="end"
                 >
                   <SearchIcon />
+                </IconButton>
+                <IconButton
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls="primary-search-account-menu"
+                  aria-haspopup="true"
+                  // onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+
+              <div className="user-icons-sm">
+                <IconButton
+                  aria-label="show more"
+                  aria-controls="primary-search-account-menu-mobile"
+                  aria-haspopup="true"
+                  // onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
                 </IconButton>
               </div>
             </Toolbar>
